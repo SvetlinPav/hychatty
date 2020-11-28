@@ -1,0 +1,52 @@
+.login {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.login > button {
+  width: 400px;
+  background-color: #738adb;
+  color: #eff2f5;
+  font-weight: 800;
+}
+.login > button:hover {
+  background-color: #111;
+  color: #738adb;
+}
+
+.login .login__logo > img {
+  object-fit: contain;
+  height: 350px;
+  border-radius: 50%;
+}
+.bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
+}
+
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
+}
+
+.bg3 {
+  animation-duration: 5s;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(25%);
+  }
+}
