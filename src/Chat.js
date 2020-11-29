@@ -44,16 +44,21 @@ function Chat() {
   return (
     <div className="chat">
       <ChatHeader channelName={channelName} />
-      <div className="chat__messages">
-        {messages.map((message) => (
-          <Message
-            timestamp={message.timestamp}
-            message={message.message}
-            user={message.user}
-          />
-        ))}
-      </div>
-
+      {!channelName ? (
+        <h2 className="noChatSelected">
+          <i className="fas fa-angle-left"></i>Select a Channel
+        </h2>
+      ) : (
+        <div className="chat__messages">
+          {messages.map((message) => (
+            <Message
+              timestamp={message.timestamp}
+              message={message.message}
+              user={message.user}
+            />
+          ))}
+        </div>
+      )}
       <div className="chat__input">
         <EmojiEmotions fontSize="large" />
         <form>
@@ -61,7 +66,7 @@ function Chat() {
             value={input}
             disabled={!channelId}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={`Message ${channelName}`}
+            placeholder={`Message ${channelName ? channelName : ""}`}
           />
           <button
             disabled={!channelId}

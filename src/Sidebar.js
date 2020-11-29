@@ -16,6 +16,7 @@ function Sidebar() {
   const [channels, setChannels] = useState([]);
   const [newChannelName, setNewChannelName] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
+  const [logOutVisible, setLogOutVisible] = useState(false);
 
   useEffect(() => {
     db.collection("channels").onSnapshot((snapshot) => {
@@ -148,14 +149,21 @@ function Sidebar() {
       </div>
 
       <div className="sidebar__profile">
-        <Avatar onClick={() => auth.signOut()} src={user.photo} />
+        <Avatar src={user.photo} />
+        <Popup
+          className="popup"
+          visible={logOutVisible}
+          onClose={() => setLogOutVisible(false)}
+        >
+          <button onClick={() => auth.signOut()}>SIGN OUT</button>
+        </Popup>
         <div className="sidebar__profileInfo">
           <h3>{user.name}</h3>
           <p>#{user.uid.substring(0, 8)}</p>
         </div>
 
         <div className="sidebar__profileIcons">
-          <Settings />
+          <Settings onClick={() => setLogOutVisible(true)} />
         </div>
       </div>
     </div>

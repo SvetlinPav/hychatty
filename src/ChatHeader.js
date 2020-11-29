@@ -1,13 +1,26 @@
-import {
-  HelpRounded,
-  PeopleAltRounded,
-  SearchRounded,
-  Send,
-} from "@material-ui/icons";
+import { HelpRounded, PeopleAltRounded, Send } from "@material-ui/icons";
 import React from "react";
 import "./ChatHeader.css";
+import { store } from "react-notifications-component";
 
 function ChatHeader({ channelName }) {
+  const buttonNotConfigured = () => {
+    store.addNotification({
+      title: "Not Configured",
+      message: "Functionality is not added for this button!",
+      type: "warning",
+      insert: "bottom",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__backInRight"],
+      animationOut: ["animate__animated", "animate__backOutRight"],
+      showIcon: true,
+      dismiss: {
+        duration: 6000,
+        onScreen: true,
+      },
+    });
+  };
+
   return (
     <div className="chatHeader">
       <div className="chatHeader__left">
@@ -23,16 +36,10 @@ function ChatHeader({ channelName }) {
 
       <div className="chatHeader__right">
         {/* Icon */}
-        <PeopleAltRounded />
-
-        <div className="chatHeader__search">
-          <input placeholder="Search" />
-          {/* Icon */}
-          <SearchRounded />
-        </div>
+        <PeopleAltRounded onClick={buttonNotConfigured} />
 
         {/* Icon */}
-        <HelpRounded />
+        <HelpRounded onClick={buttonNotConfigured} />
       </div>
     </div>
   );

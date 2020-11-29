@@ -125,6 +125,7 @@
 .sidebar__profileInfo {
   flex: 1;
   padding: 10px;
+  font-weight: 600;
 }
 
 .sidebar__profileInfo > h3 {
@@ -133,6 +134,10 @@
 
 .sidebar__profileIcons > .MuiSvgIcon-root {
   padding: 10px;
+}
+.sidebar__profileIcons > .MuiSvgIcon-root:hover {
+  color: white;
+  cursor: pointer;
 }
 
 .sidebar__channelsList {
