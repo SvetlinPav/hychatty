@@ -9,9 +9,12 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "animate.css": "^4.1.1",
     "firebase": "^8.1.1",
     "react": "^17.0.1",
+    "react-animated-popup": "^0.1.1",
     "react-dom": "^17.0.1",
+    "react-notifications-component": "^3.0.2",
     "react-redux": "^7.2.2",
     "react-scripts": "4.0.1"
   },

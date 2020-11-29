@@ -30,7 +30,7 @@ function Chat() {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    if (input.length >= 1) {
+    if (input.length >= 1 && input.length < 300) {
       db.collection("channels").doc(channelId).collection("messages").add({
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         message: input,

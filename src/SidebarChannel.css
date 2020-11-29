@@ -1,3 +1,7 @@
+.sidebarChannel {
+  padding-right: 20px;
+}
+
 .sidebarChannel:hover > h4 {
   color: white;
   background-color: #40464b;

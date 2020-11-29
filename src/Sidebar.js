@@ -3,15 +3,19 @@ import "./Sidebar.css";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddIcon from "@material-ui/icons/Add";
 import SidebarChannel from "./SidebarChannel";
-import { InfoOutlined, Settings, SignalCellularAlt } from "@material-ui/icons";
+import { Settings } from "@material-ui/icons";
 import { Avatar } from "@material-ui/core";
 import { selectUser } from "./features/userSlice";
 import { useSelector } from "react-redux";
 import db, { auth } from "./firebase";
+import Popup from "react-animated-popup";
+import { store } from "react-notifications-component";
 
 function Sidebar() {
   const user = useSelector(selectUser);
   const [channels, setChannels] = useState([]);
+  const [newChannelName, setNewChannelName] = useState("");
+  const [alertVisible, setAlertVisible] = useState(false);
 
   useEffect(() => {
     db.collection("channels").onSnapshot((snapshot) => {
@@ -24,14 +28,46 @@ function Sidebar() {
     });
   }, []);
 
-  const handleAddChannel = () => {
-    const channelName = prompt("Enter Channel Name to Create");
+  const channelNameCharExeeded = () => {
+    store.addNotification({
+      title: "Something went wrong.",
+      message:
+        "Make sure your new epic channel name doesn't exceed 20 characters 😊",
+      type: "danger",
+      insert: "top",
+      container: "bottom-right",
+      animationIn: ["animate__animated", "animate__backInRight"],
+      animationOut: ["animate__animated", "animate__backOutRight"],
+      showIcon: true,
+      dismiss: {
+        duration: 6000,
+        onScreen: true,
+      },
+    });
+  };
 
-    if (channelName) {
+  const handleAddChannel = (e) => {
+    e.preventDefault();
+    if (newChannelName && newChannelName.length <= 20) {
       db.collection("channels").add({
-        channelName: channelName,
+        channelName: newChannelName,
       });
+      hideCreateChannelPopUp();
+    } else if (newChannelName && newChannelName.length > 20) {
+      channelNameCharExeeded();
     }
+
+    setNewChannelName("");
+  };
+
+  const showCreateChannelPopUp = () => {
+    setAlertVisible(true);
+    setNewChannelName("");
+  };
+
+  const hideCreateChannelPopUp = () => {
+    setAlertVisible(false);
+    setNewChannelName("");
   };
 
   return (
@@ -40,6 +76,49 @@ function Sidebar() {
         <h3>HyChatty</h3>
         <ExpandMoreIcon />
       </div>
+      <Popup
+        className="popup"
+        visible={alertVisible}
+        onClose={() => setAlertVisible(false)}
+      >
+        <div className="popup__wrap">
+          <h4>Create New Channel</h4>
+          <h4
+            className={`${
+              newChannelName.length <= 20 ? "" : "notInLimitChannelName"
+            }`}
+          >
+            {newChannelName.length}
+            <span style={{ color: "white" }}>/</span>
+            <span style={{ color: "green" }}>20</span>
+          </h4>
+          <div className="alert__form">
+            <form>
+              <input
+                value={newChannelName}
+                onChange={(e) => setNewChannelName(e.target.value)}
+                placeholder={`New Channel`}
+              />
+              <div className="inputButtons__wrap">
+                <button
+                  className="closeCreateChannel__inputButton"
+                  type="button"
+                  onClick={hideCreateChannelPopUp}
+                >
+                  CLOSE
+                </button>
+                <button
+                  className="createChannel__inputButton"
+                  type="submit"
+                  onClick={handleAddChannel}
+                >
+                  CREATE
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Popup>
 
       <div className="sidebar__channels">
         <div className="sidebar__channelsHeader">
@@ -49,7 +128,7 @@ function Sidebar() {
           </div>
           {channels.length < 8 ? (
             <AddIcon
-              onClick={handleAddChannel}
+              onClick={showCreateChannelPopUp}
               className="sidebar__addChannel"
             />
           ) : (
@@ -65,18 +144,6 @@ function Sidebar() {
               channelName={channel.channelName}
             />
           ))}
-        </div>
-      </div>
-
-      <div className="sidebar__voice">
-        <SignalCellularAlt className="sidebar__voiceIcon" fontSize="large" />
-        <div className="sidebar__voiceInfo">
-          <h3>EUNE GODS</h3>
-          <p>Connected</p>
-        </div>
-
-        <div className="sidebar__voiceIcons">
-          <InfoOutlined />
         </div>
       </div>
 

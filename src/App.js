@@ -7,6 +7,9 @@ import { selectUser } from "./features/userSlice";
 import Login from "./Login";
 import { auth } from "./firebase";
 import { login, logout } from "./features/userSlice";
+import ReactNotification from "react-notifications-component";
+import "animate.css";
+import "react-notifications-component/dist/theme.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +33,7 @@ function App() {
   }, [dispatch]);
   return (
     <div className="app">
+      <ReactNotification />
       {user ? (
         <>
           <Sidebar />

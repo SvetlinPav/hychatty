@@ -42,7 +42,6 @@
   align-items: center;
 }
 
-.sidebar__voice,
 .sidebar__profile {
   display: flex;
   justify-content: space-between;
@@ -53,13 +52,62 @@
   border-top: 1px solid gray;
 }
 
-.sidebar__voiceInfo {
-  flex: 1;
-  padding: 10px;
+.popup__wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.sidebar__voiceIcon {
-  color: #4fb185;
+.popup__wrap h4 {
+  color: white;
+  padding-bottom: 14px;
+}
+
+.alert__form {
+  display: flex;
+  align-items: center;
+  color: gray;
+  border-radius: 3px;
+  padding: 3px;
+}
+
+.inLimitChannelName {
+  color: white;
+}
+
+.notInLimitChannelName {
+  color: crimson !important;
+}
+
+.alert__form > input {
+  background: transparent;
+  outline-width: 0;
+  color: white;
+  border: none;
+}
+
+.inputButtons__wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createChannel__inputButton,
+.closeCreateChannel__inputButton {
+  background-color: #474b53;
+  color: white;
+  border: white;
+  padding: 8px 12px;
+  margin: 18px 10px auto 10px;
+  font-weight: 600;
+  border-radius: 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.createChannel__inputButton:hover,
+.closeCreateChannel__inputButton:hover {
+  background-color: #5f6674;
 }
 
 .sidebar__voiceInfo > h3 {
