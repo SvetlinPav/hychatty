@@ -6,14 +6,29 @@
 }
 
 .login > button {
-  width: 400px;
-  background-color: #738adb;
-  color: #eff2f5;
+  width: 200px;
+  background-color: #6c3;
+  color: #303030;
+  border-radius: 20px;
+  font-size: 1.1rem;
   font-weight: 800;
+  transition: all 0.4s;
+  margin: auto 50px;
+  margin-bottom: 160px;
 }
 .login > button:hover {
-  background-color: #111;
-  color: #738adb;
+  background-color: rgb(137, 233, 89);
+  color: #111;
+  transform: scale(1.05);
+}
+
+.fab {
+  margin-right: 8px;
+}
+
+h2.loginh2 {
+  color: white;
+  text-align: center;
 }
 
 .login .login__logo > img {
@@ -23,7 +38,7 @@
 }
 .bg {
   animation: slide 3s ease-in-out infinite alternate;
-  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+  background-image: linear-gradient(-60deg, #2f3135 50%, #5f6674 50%);
   bottom: 0;
   left: -50%;
   opacity: 0.5;

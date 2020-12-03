@@ -13,7 +13,6 @@ function Login() {
       <div className="bg"></div>
       <div className="bg bg2"></div>
       <div className="bg bg3"></div>
-      <h2>I AM MISTER LOGIN PAGE</h2>
 
       <div className="login__logo">
         <img
@@ -21,8 +20,14 @@ function Login() {
           alt=""
         />
       </div>
+      <h2 className="loginh2">We won't waste your time filling in forms</h2>
+      <h2 className="loginh2">
+        <i class="fas fa-angle-down"></i>
+      </h2>
 
-      <Button onClick={signIn}>Sign In</Button>
+      <Button onClick={signIn}>
+        <i class="fab fa-google"></i> Sign In
+      </Button>
     </div>
   );
 }
